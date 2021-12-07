@@ -8,11 +8,11 @@
 | Daniel Sugianto | 05111940000075 |
 | Ryan Fernaldy | 05111940000152 |
 
-## A
+## Soal A
 
-## B
+## Soal B
 
-## C
+## Soal C
 Kalian juga diharuskan melakukan Routing agar setiap perangkat pada jaringan tersebut dapat terhubung.
 - Konfigurasi GNS3 & Routing
   - FOOSHA
@@ -131,7 +131,7 @@ Kalian juga diharuskan melakukan Routing agar setiap perangkat pada jaringan ter
       netmask 255.255.255.248
       gateway 192.170.7.137
     ```
-## D
+## Soal D
 Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya.
 - JIPANGU (DHCP Server)
   - Instalasi
@@ -232,21 +232,22 @@ Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan E
   ![image](https://user-images.githubusercontent.com/68326540/144961489-6a3a5110-fe27-4f9c-8764-63c1fe503306.png)<br>
   ![image](https://user-images.githubusercontent.com/68326540/144961506-ca7da406-136d-4060-bc2f-dd02a4af98af.png)<br>
 
-## 1
+## Soal 1
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
-- Konfigurasi eth0 di Foosha
-  ```
-  auto eth0
-  iface eth0 inet static
-    address 192.168.122.2
-    netmask 255.255.255.252
-    gateway 192.168.122.1
-  ```
-- Jalankan
-  ```
-  iptables -t nat -A POSTROUTING -s 192.170.0.0/21 -o eth0 -j SNAT --to-source 192.168.122.2
-  echo nameserver 192.168.122.1 > /etc/resolv.conf
-  ```
+- FOOSHA
+  - Konfigurasi GNS3
+    ```
+    auto eth0
+    iface eth0 inet static
+      address 192.168.122.2
+      netmask 255.255.255.252
+      gateway 192.168.122.1
+    ```
+  - Jalankan
+    ```
+    iptables -t nat -A POSTROUTING -s 192.170.0.0/21 -o eth0 -j SNAT --to-source 192.168.122.2
+    echo nameserver 192.168.122.1 > /etc/resolv.conf
+    ```
 - WATER7, GUANHAO, DORIKI, JIPANGU, JORGE, MAINGATE
   ```
   echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -269,4 +270,67 @@ Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk meng
     ```
     //dnssec-validation auto;
     ```
+## Soal 2
+
+## Soal 3
+
+## Soal 4
+Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.
+- DORIKI
+  ```
+  iptables -A INPUT -s 192.170.7.0/25 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
+  iptables -A INPUT -s 192.170.7.0/25 -j REJECT
   
+  iptables -A INPUT -s 192.170.0.0/22 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
+  iptables -A INPUT -s 192.170.0.0/22 -j REJECT
+  ```
+- Hasil<br>
+  BLUENO Ping google.com pada hari senin 6 Desember 2021 pukul 10:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983304-fcaa4506-1c64-4570-a661-7f1883f15042.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983328-22118b92-7d2e-4f45-9795-c79c082cfe44.png)<br>
+
+  BLUENO Ping google.com pada hari Jumat 3 Desember 2021 pukul 18:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983529-afdf7968-8239-440b-be53-0573530b88a4.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983445-bafb228a-90ff-4148-9dda-032ae67289f3.png)
+
+  CIPHER Ping google.com pada hari senin 6 Desember 2021 pukul 10:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983304-fcaa4506-1c64-4570-a661-7f1883f15042.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983648-c558b78e-932c-4767-b034-1ded3184c1fd.png)
+
+  CIPHER Ping google.com pada hari Jumat 3 Desember 2021 pukul 18:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983529-afdf7968-8239-440b-be53-0573530b88a4.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144983674-d7ab79d9-3f5d-4ea7-beef-c509fb4c084d.png)
+
+## Soal 5
+Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
+- DORIKI
+  ```
+  iptables -A INPUT -s 192.170.4.0/23 -m time --timestart 15:01 --timestop 23:59 -j ACCEPT
+  iptables -A INPUT -s 192.170.4.0/23 -m time --timestart 00:00 --timestop 06:59 -j ACCEPT
+  iptables -A INPUT -s 192.170.4.0/23 -j REJECT
+  
+  iptables -A INPUT -s 192.170.6.0/24 -m time --timestart 15:01 --timestop 23:59 -j ACCEPT
+  iptables -A INPUT -s 192.170.6.0/24 -m time --timestart 00:00 --timestop 06:59 -j ACCEPT
+  iptables -A INPUT -s 192.170.6.0/24 -j REJECT
+  ```
+- Hasil<br>
+  ELENA Ping google.com pada hari minggu 5 Desember 2021 pukul 19:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984092-e47ef542-5aef-480c-8a97-dba6b7e2ab1e.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984330-3fd77835-54c3-4171-894b-4c512bb4f444.png)<br>
+
+  ELENA Ping google.com pada hari senin 6 Desember 2021 pukul 10:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984390-8e52768a-676c-4ec6-bb13-c12b59c9b5b0.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984361-773fb341-5df3-4c89-95d2-b28ac17c495e.png)<br>
+
+  
+  FUKUROU ping google.com pada hari minggu 5 Desember 2021 pukul 19:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984095-93bf93e3-b528-4da1-8538-3cbf570fe696.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984428-085aeb93-cc54-4f5d-9ecc-f0c595c82724.png)<br>
+
+
+  FUKUROU Ping google.com pada hari senin 6 Desember 2021 pukul 10:00<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984406-03785074-3bdf-4665-8317-d8efc67db12b.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144984449-199a99c4-cecd-45bb-8f98-b88223f22d6b.png)<br>
+
+
+## Soal 6
