@@ -226,11 +226,11 @@ Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan E
   auto eth0
   iface eth0 inet dhcp
   ```
-- Hasil
-  ![image](https://user-images.githubusercontent.com/68326540/144961452-5b77e43b-1d4b-4669-b356-66d6a41c4793.png)
-  ![image](https://user-images.githubusercontent.com/68326540/144961473-1cc4a172-668e-4628-93d6-21c8da474564.png)
-  ![image](https://user-images.githubusercontent.com/68326540/144961489-6a3a5110-fe27-4f9c-8764-63c1fe503306.png)
-  ![image](https://user-images.githubusercontent.com/68326540/144961506-ca7da406-136d-4060-bc2f-dd02a4af98af.png)
+- Hasil<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144961452-5b77e43b-1d4b-4669-b356-66d6a41c4793.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144961473-1cc4a172-668e-4628-93d6-21c8da474564.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144961489-6a3a5110-fe27-4f9c-8764-63c1fe503306.png)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/144961506-ca7da406-136d-4060-bc2f-dd02a4af98af.png)<br>
 
 ## 1
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
