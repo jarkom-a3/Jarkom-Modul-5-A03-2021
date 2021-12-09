@@ -15,10 +15,11 @@
 - Pembagian subnetting
 ![image](https://user-images.githubusercontent.com/62937814/145019988-cd6ee2b9-493f-40f1-836f-0eb280f1180a.png)
 
+![image](https://user-images.githubusercontent.com/62937814/145020197-5d583871-193e-41bf-b3cf-d788491d5b96.png)
+
 - Tree
 ![image](https://user-images.githubusercontent.com/62937814/145020116-cf9424e1-8c85-4682-aaa5-7aa0204a91b0.png)
 
-![image](https://user-images.githubusercontent.com/62937814/145020197-5d583871-193e-41bf-b3cf-d788491d5b96.png)
 
 
 ## Soal C
