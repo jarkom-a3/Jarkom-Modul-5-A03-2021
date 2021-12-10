@@ -9,17 +9,22 @@
 | Ryan Fernaldy | 05111940000152 |
 
 ## Soal A
+Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan Luffy dibawah ini:<br>
+![image](https://user-images.githubusercontent.com/68326540/145647812-93a4d668-12bf-40cd-9a18-8ef393d07a38.png)
+### Kendala
+Tidak ada
 
 ## Soal B
 ### VLSM
 - Pembagian subnetting
-![image](https://user-images.githubusercontent.com/62937814/145019988-cd6ee2b9-493f-40f1-836f-0eb280f1180a.png)
+  ![image](https://user-images.githubusercontent.com/62937814/145019988-cd6ee2b9-493f-40f1-836f-0eb280f1180a.png)
 
-![image](https://user-images.githubusercontent.com/62937814/145020197-5d583871-193e-41bf-b3cf-d788491d5b96.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145649231-b95a4fac-b839-48a8-86bb-3bb093a3e611.png)
 
 - Tree
 ![image](https://user-images.githubusercontent.com/62937814/145020116-cf9424e1-8c85-4682-aaa5-7aa0204a91b0.png)
-
+### Kendala
+Tidak ada
 
 
 ## Soal C
@@ -141,6 +146,14 @@ Kalian juga diharuskan melakukan Routing agar setiap perangkat pada jaringan ter
       netmask 255.255.255.248
       gateway 192.170.7.137
     ```
+  - Hasil
+    Ping dari JIPANGU ke JORGE<br>
+    ![image](https://user-images.githubusercontent.com/68326540/145647979-c7b4ef91-8cc4-4c7f-9171-5e13a1d47bed.png)
+    Ping dari BLUENO ke MAINGATE<br>
+    ![image](https://user-images.githubusercontent.com/68326540/145648012-879ce4f0-c299-42ee-b3c1-abc7cf8c44b3.png)
+### Kendala
+Tidak ada
+
 ## Soal D
 Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya.
 - JIPANGU (DHCP Server)
@@ -241,6 +254,8 @@ Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan E
   ![image](https://user-images.githubusercontent.com/68326540/144961473-1cc4a172-668e-4628-93d6-21c8da474564.png)<br>
   ![image](https://user-images.githubusercontent.com/68326540/144961489-6a3a5110-fe27-4f9c-8764-63c1fe503306.png)<br>
   ![image](https://user-images.githubusercontent.com/68326540/144961506-ca7da406-136d-4060-bc2f-dd02a4af98af.png)<br>
+### Kendala
+Tidak ada
 
 ## Soal 1
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
@@ -280,9 +295,18 @@ Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk meng
     ```
     //dnssec-validation auto;
     ```
+  - Hasil
+    ![image](https://user-images.githubusercontent.com/68326540/145648102-93d80abe-b8d5-4a95-aa2b-045ef94a808a.png)
+### Kendala
+Tidak ada
+
 ## Soal 2
+### Kendala
+Tidak ada
 
 ## Soal 3
+### Kendala
+Tidak ada
 
 ## Soal 4
 Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.
@@ -310,6 +334,8 @@ Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00
   CIPHER Ping google.com pada hari Jumat 3 Desember 2021 pukul 18:00<br>
   ![image](https://user-images.githubusercontent.com/68326540/144983529-afdf7968-8239-440b-be53-0573530b88a4.png)<br>
   ![image](https://user-images.githubusercontent.com/68326540/144983674-d7ab79d9-3f5d-4ea7-beef-c509fb4c084d.png)
+### Kendala
+Tidak ada
 
 ## Soal 5
 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
@@ -341,6 +367,82 @@ Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga p
   FUKUROU Ping google.com pada hari senin 6 Desember 2021 pukul 10:00<br>
   ![image](https://user-images.githubusercontent.com/68326540/144984406-03785074-3bdf-4665-8317-d8efc67db12b.png)<br>
   ![image](https://user-images.githubusercontent.com/68326540/144984449-199a99c4-cecd-45bb-8f98-b88223f22d6b.png)<br>
-
+### Kendala
+Tidak ada
 
 ## Soal 6
+Karena kita memiliki 2 Web Server, Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
+- MAINGATE & JORGE<br>
+  Instalasi Web Server
+  ```
+  apt-get update
+  apt-get install apache2 -y
+
+  service apache2 start
+  ```
+- DORIKI
+  - Tambahkan konfigurasi berikut /etc/bind/named.conf.local (kita menggunakan domain jualbelikapal.A03.com)
+    ```
+    zone "jualbelikapal.A03.com" {
+      type master;
+      file "/etc/bind/jarkom/jualbelikapal.A03.com";
+    };
+    ```
+  - Buat Folder
+    ```
+    mkdir /etc/bind/jarkom
+    ```
+  - Atur konfigurasi binding di /etc/bind/jarkom/jualbelikapal.A03.com. Arahkan domain tersebut ke IP address pada jaringan A8 yang belum dipakai (192.170.7.140)
+    ```
+    ;
+    ; BIND data file for local loopback interface
+    ;
+    $TTL    604800
+    @       IN      SOA     jualbelikapal.A03.com. root.jualbelikapal.A03.com. (
+                                    2       ; Serial
+                            604800          ; Refresh
+                            86400           ; Retry
+                            2419200         ; Expire
+                            604800 )        ; Negative Cache TTL
+    ;
+    @       IN      NS      jualbelikapal.A03.com.
+    @       IN      A       192.170.7.140
+    ```
+  - Restart
+    ```
+    service bind9 restart
+    ```
+ - GUANHAO
+   Tambahkan rule iptables berikut (Tambahkan PREROUTING untuk setiap paket dengan tujuan 192.170.7.140 pada port 80 maka akan diarahkan ke JORGE dan MAINGATE secara bergantian dan POSTROUTING untuk setiap paket dari JORGE ke MAINGATE diubah source-nya menjadi 192.170.7.140)
+   ```
+   iptables -A PREROUTING -t nat -p tcp -d 192.170.7.140 --dport 80 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.170.7.138
+
+   iptables -A PREROUTING -t nat -p tcp -d 192.170.7.140 --dport 80 -j DNAT --to-destination 192.170.7.139
+
+   iptables -t nat -A POSTROUTING -p tcp -s 192.170.7.138 --dport 80 -j SNAT --to-source 192.170.7.140
+
+   iptables -t nat -A POSTROUTING -p tcp -s 192.170.7.139 --dport 80 -j SNAT --to-source 192.170.7.140
+   ```
+- Hasil
+  lynx jualbelikapal.A03.com dari BLUENO yang pertama (dilayani JORGE)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/145648780-16df7e6b-028a-4112-bf4f-d85197cfbc3b.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648815-d3619b7d-ad16-49ca-be14-845636928bc0.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648830-5acb73b2-ffe2-48ac-9731-ca9ef26b3ee2.png)
+  <br>
+  lynx jualbelikapal.A03.com dari BLUENO yang kedua (dilayani MAINGATE)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/145648862-14dc19a3-b616-4768-a9a7-c82baa1967b2.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648890-60917687-d41e-46a6-8e94-6e632c6df88b.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648898-80f4b599-3ed7-4523-8ec8-5ad676625576.png)
+  <br>
+  lynx jualbelikapal.A03.com dari BLUENO yang ketiga (dilayani JORGE)<br>
+  ![image](https://user-images.githubusercontent.com/68326540/145648962-5ddc3f5f-5648-44a8-8d90-3a6abe0a8891.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648976-dddeeb0d-ce8b-4210-bee1-d78720e042a4.png)
+  ![image](https://user-images.githubusercontent.com/68326540/145648978-2936a40f-4554-4b68-b025-46caca2ea897.png)
+  
+### Kendala
+Tidak ada
+
+
+
+
+  
