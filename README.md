@@ -301,10 +301,25 @@ Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk meng
 Tidak ada
 
 ## Soal 2
+
+Diminta untuk mendrop semua akses HTTP dari luar topologi pada server yang merupakan DHCP Server dan DNS Server demi menjaga keamanan. Untuk mencapai tujuan tersebut, tambahkan perintah iptables sebagai berikut di FOOSHA.
+
+```
+iptables -A FORWARD -p tcp --dport 80 -d 192.170.7.128/29 -i eth0 -j DROP
+```
+
 ### Kendala
 Tidak ada
 
 ## Soal 3
+
+Diminta untuk membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop. Untuk mencapai tujuan tersebut, tambahkan perintah iptables sebagai berikut di Jipangu (DHCP Server) dan Doriki (DNS Server).
+```
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+
+Perintah iptables harus diletakkan di bagian teratas.
+
 ### Kendala
 Tidak ada
 
